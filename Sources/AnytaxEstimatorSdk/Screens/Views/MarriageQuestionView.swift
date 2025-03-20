@@ -1,0 +1,60 @@
+import SwiftUI
+
+struct MarriageQuestionView: View {
+    typealias Loc = AppConstatns.MarriageQuestionView
+    
+    @Environment(\.colorScheme) var colorScheme
+    @Binding var showExplanation: Bool
+    let explanation: String?
+    let infoButtonColor: Color
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
+                Text(Loc.title)
+                    .questionTextStyle()
+                    .frame(minHeight: 87)
+                    .cornerRadius(10)
+                
+                if let explanation = explanation {
+                    Button(action: {
+                        withAnimation {
+                            showExplanation.toggle()
+                        }
+                    }) {
+                        HStack(spacing: 5) {
+                            Image(systemName: showExplanation ? "x.circle" : "info.circle")
+                            Text(showExplanation
+                                 ? AppConstatns.Common.minimizeButtonTitle
+                                 : AppConstatns.Common.learnMoreButtonTitle
+                            )
+                        }
+                        .font(.system(size: 15, weight: .regular, design: .rounded))
+                        .foregroundColor(infoButtonColor)
+                        .lineSpacing(7.5)
+                    }
+                    .padding(.leading, 15)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    if showExplanation {
+                        Text(explanation)
+                            .grayInfoTextStyle(colorScheme: colorScheme)
+                            .padding(.top)
+                    }
+                }
+            }
+        }
+        .padding()
+        .background(Color.backgroundColor(colorScheme: colorScheme))
+        .cornerRadius(10)
+        .padding(.horizontal)
+    }
+}
+
+#Preview {
+    MarriageQuestionView(
+        showExplanation: .constant(true),
+        explanation: "If you choose to file jointly with your spouse this will affect your tax refund and we will ask some questions about your spouse as well.",
+        infoButtonColor: .blue
+    )
+}

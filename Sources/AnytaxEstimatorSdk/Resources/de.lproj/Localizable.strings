@@ -1,0 +1,92 @@
+
+// WelcomeScreen
+
+"estimator_Title" = "Steuer Rechner";
+"get_Estimate_ButtonTitle" = "Meine Steuererstattung jetzt schätzen";
+
+//AlmostDoneView
+
+"almost_done" = "Super, fast fertig!";
+"almost_done_hint" = "Willst du ein paar optionale Fragen beantworten um eine noch genauere Prognose zu erhalten?";
+
+//MarriageQuestionView
+
+"question_5" = "Warst du verheiratet und möchtest in der Berechnung die Zusammenveranlagung berücksichtigen?";
+"question_5_hint" = "Wenn Sie gemeinsam mit Ihrem Partner veranlagen, beeinflusst das Ihre Steuerrückerstattung. Wir werden Ihnen dann auch ein paar Fragen zu Ihrem Partner stellen.";
+
+//TaxEstimatorScreen
+
+"caption" = "Mit welcher Steuerrückerstattung kannst du rechnen?";
+"caption_hint" = "Beantworte ein paar Fragen und erhalte innerhalb von Sekunden eine Prognose deiner Steuerrückerstattung.";
+"question_1" = "Wie hoch war dein gesamter Bruttolohn im Jahr 2024? *";
+"question_1_hint" = "Deinen Bruttoarbeitslohn findest du zum Beispiel in Zeile 3 der Lohnsteuerbescheinigung deines Arbeitgebers.";
+"question_2" = "Wie weit war dein Arbeitsweg (kürzeste Strecke, nur Hinweg)? *";
+"question_2_hint" = "";
+"question_3" = "Wie viele Tage des Jahres hast du von zuhause aus gearbeitet? *";
+"question_3_hint" = "Bei einer 5-Tage-Woche akzeptiert das Finanzamt in der Regel bis zu 230 Arbeitstage und bei einer 6-Tage-Woche bis zu 280 Arbeitstage pro Kalenderjahr ohne weitere Nachweise. Bitte beachte dabei, dass die Home-Office-Pauschale auf maximal 1.260 € begrenzt ist. Den abziehbaren Betrag berechnen wir für dich automatisch im Hintergrund.";
+"question_4" = "Wie viele Kinder sollen steuerlich berücksichtigt werden? *";
+"children_placeholder" = "Anzahl";
+"question_4_hint" = "";
+
+//OptionalQuestionsScreen
+
+"optional_caption" = "Optionale Angaben für ein noch genaueres Ergebnis:";
+"optional_caption_hint" = "Falls du einzelne Werte nicht genau weißt kannst du sie schätzen oder einfach überspringen.";
+"question_6" = "Welche Kosten hattest du für haushaltsnahe Dienstleistungen oder Handwerkerleistungen?\n";
+"labor_costs_only" = "Nur Arbeitskosten";
+"question_6_hint" = "Hier können alle haushaltsnahen Dienstleistungen und Handwerkerleistungen (allerdings nur anteilig Lohnkosten, Fahrtkosten und Maschinenkosten inkl. Umsatzsteuer) eingetragen werden. Maximal bis zu 20.000 €. Wir berechnen den abzugsfähigen Betrag automatisch im Hintergrund.";
+"question_7" = "Wie viel hast du für Arbeitsmittel ausgegeben? (bspw. Büroausstattung, Laptop, Kopfhörer etc.)";
+"question_7_hint" = "";
+"question_8" = "Wie viel Sonderausgaben hattest du? (bspw. für Spenden, Kinderbetreuung oder die erste eigene Berufsausbildung)";
+"question_8_hint" = "";
+"question_9" = "Falls bekannt: Wie viel Lohnsteuer hat dein Arbeitgeber laut Lohnsteuerbescheinigung einbehalten?";
+"question_9_hint" = "Den Betrag der einbehaltenen Lohnsteuer findest du zum Beispiel in Zeile 4 der Lohnsteuerbescheinigung deines Arbeitgebers.";
+
+//PartnersDetailsScreen
+
+"partner_caption" = "Angaben zur weiteren Person:";
+"partner_caption_hint" = "Füge nur Kosten deiner Partnerin bzw. deines Partners hinzu, die in deinen bisherigen Angaben noch nicht berücksichtigt sind.";
+"partner_question_1" = "Wie hoch war deren gesamter Bruttolohn im Jahr 2024?";
+"partner_question_1_hint" = "Deinen Bruttoarbeitslohn findest du zum Beispiel in Zeile 3 der Lohnsteuerbescheinigung deines Arbeitgebers.";
+"partner_question_2" = "Wie weit war der Arbeitsweg (kürzeste Strecke, nur Hinweg)?";
+"partner_question_2_hint" = "";
+"partner_question_3" = "Wie viele Tage des Jahres wurde von zuhause aus gearbeitet?";
+"partner_question_3_hint" = "Bei einer 5-Tage-Woche akzeptiert das Finanzamt in der Regel bis zu 230 Arbeitstage und bei einer 6-Tage-Woche bis zu 280 Arbeitstage pro Kalenderjahr ohne weitere Nachweise. Bitte beachte dabei, dass die Home-Office-Pauschale auf maximal 1.260 € begrenzt ist. Den abziehbaren Betrag berechnen wir für dich automatisch im Hintergrund.";
+"get_result_ButtonTitle" = "Nein, Ergebnis";
+
+//PartnersOptionalQuestionsScreen
+
+"partner_optional_caption" = "Optionale Angaben für ein noch genaueres Ergebnis:";
+"partner_optional_caption_hint" = "Falls du einzelne Werte nicht genau weißt kannst du sie schätzen oder einfach überspringen.";
+"partner_question_4" = "Welche Kosten fielen für haushaltsnahe Dienstleistungen oder Handwerkerleistungen an?\n";
+"partner_question_4_hint" = "Hier können alle haushaltsnahen Dienstleistungen und Handwerkerleistungen (allerdings nur anteilig Lohnkosten, Fahrtkosten und Maschinenkosten inkl. Umsatzsteuer) eingetragen werden. Maximal bis zu 20.000 €. Wir berechnen den abzugsfähigen Betrag automatisch im Hintergrund.";
+"partner_question_5" = "Wie viel wurde für Arbeitsmittel ausgegeben? (bspw. Büroausstattung, Laptop, Kopfhörer etc.)";
+"partner_question_5_hint" = "";
+"partner_question_6" = "Wie viele Sonderausgaben fielen an? (bspw. für Spenden, Kinderbetreuung oder die erste eigene Berufsausbildung)\n";
+"partner_question_6_hint" = "";
+
+// TaxResultScreen
+
+"final_caption" = "Berechnung erstellt!";
+"final_estimation" = "Geschätzte Erstattung";
+"tax_return_caption" = "Steuererklärung erstellen";
+"tax_return_text" = "In nur 30 Minuten";
+"start_button_title" = "Starten";
+"calculating_text" = "Berechnung läuft...";
+"try_again_button_title" = "Erneut versuchen";
+
+// Common
+
+"button_get_estimate" = "Steuerrückerstattung berechnen";
+"optional" = "optional";
+"enter_amount" = "Betrag";
+"dash" = " - ";
+"yes_button_title" = "Ja";
+"no_button_title" = "Nein";
+"minimize_ButtonTitle" = "minimieren";
+"learn_more_ButtonTitle" = "mehr Infos";
+"key_board_Toolbar_Button_Title" = "Fertig";
+"get_estimate_button_title" = "Steuer Rechner";
+"error_message" = "Etwas ist schief gelaufen...";
+"distance_to_work" = "Kilometer";
+"work_from_home_days" = "Tage";

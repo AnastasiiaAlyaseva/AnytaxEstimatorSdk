@@ -1,0 +1,92 @@
+
+// WelcomeScreen
+
+"estimator_Title" = "estimator";
+"get_Estimate_ButtonTitle" = "Get my income tax estimate";
+
+//AlmostDoneView
+
+"almost_done" = "Great, almost done!";
+"almost_done_hint" = "Do you want to answer a couple optional questions for a more detailed estimate?";
+
+//MarriageQuestionView
+
+"question_5" = "Were you married during the tax year and would file jointly?";
+"question_5_hint" = "If you choose to file jointly with your spouse this will affect your tax refund and we will ask some questions about your spouse as well.";
+
+//TaxEstimatorScreen
+
+"caption" = "Want to find out much of a tax refund you can get?";
+"caption_hint" = "Answer a couple of questions to quickly get an estimate of your potential refund from the tax office.";
+"question_1" = "What is your yearly gross income from employment in 2024? *";
+"question_1_hint" = "You can find your gross salary for example in line 3 of your employer's income tax statement.";
+"question_2" = "How far was your one-way distance to work (shortest distance one-way)? *";
+"question_2_hint" = "";
+"question_3" = "How many days did you work from home? *";
+"question_3_hint" = "With a 5-day week the tax office generally accepts up to 230 working days and with a 6-day week up to 280 working days per calendar year without further proof. Please note that the home office allowance is limited to a maximum of €1260. We will automatically calculate the deductible amount for you in the background.";
+"question_4" = "How many children do you have? *";
+"children_placeholder" = "Number of children";
+"question_4_hint" = "";
+
+//OptionalQuestionsScreen
+
+"optional_caption" = "Optional answers for a more detailed estimate:";
+"optional_caption_hint" = "You can also give estimates if you don’t know the exact amounts otherwise just skip the answer.";
+"question_6" = "What expenses did you have for household-related or craftsmen's services?\n";
+"labor_costs_only" = "Labor-costs only";
+"question_6_hint" = "All household-related services and tradesmen's services can be entered here (but only pro rata labour costs travel costs and machine costs incl. VAT). Up to a maximum of €20000. We automatically calculate the deductible amount in the background.";
+"question_7" = "How much did you pay for items that you use for work, like a Desk, Laptop or Headphones?";
+"question_7_hint" = "";
+"question_8" = "How much did you pay for special expenses like Childcare, School Fees, or own Education costs?";
+"question_8_hint" = "";
+"question_9" = "Do you know the actual income tax you paid as stated in your Lohnsteuerbescheinigung?";
+"question_9_hint" = "You can find the amount of income tax withheld for example in line 4 of your employer's income tax statement.";
+
+//PartnersDetailsScreen
+
+"partner_caption" = "Enter your partner’s details.";
+"partner_caption_hint" = "Only add additional costs that you haven’t already considered for yourself.";
+"partner_question_1" = "What is their yearly gross income from employment in 2024? ";
+"partner_question_1_hint" = "You can find your gross salary for example in line 3 of your employer's income tax statement.";
+"partner_question_2" = "How far was their one-way distance to work (shortest distance one-way)?";
+"partner_question_2_hint" = "";
+"partner_question_3" = "How many days did they work from home?";
+"partner_question_3_hint" = "With a 5-day week the tax office generally accepts up to 230 working days and with a 6-day week up to 280 working days per calendar year without further proof. Please note that the home office allowance is limited to a maximum of €1260. We will automatically calculate the deductible amount for you in the background.";
+"get_result_ButtonTitle" = "No, get result";
+
+//PartnersOptionalQuestionsScreen
+
+"partner_optional_caption" = "Optional answers for a more detailed estimate:";
+"partner_optional_caption_hint" = "You can also give estimates if you don’t know the exact amounts otherwise just skip the answer.";
+"partner_question_4" = "What expenses did they have for household-related or craftsmen's services?\n";
+"partner_question_4_hint" = "All household-related services and tradesmen's services can be entered here (but only pro rata labour costs travel costs and machine costs incl. VAT). Up to a maximum of €20000. We automatically calculate the deductible amount in the background.";
+"partner_question_5" = "How much did they pay for electronic items that you use for work, like a Desk, Laptop or Headphones?";
+"partner_question_5_hint" = "";
+"partner_question_6" = "How much did they pay for special expenses like Childcare, School Fees, or own Education costs?";
+"partner_question_6_hint" = "";
+
+// TaxResultScreen
+
+"final_caption" = "Great!";
+"final_estimation" = "Estimated tax return";
+"tax_return_caption" = "Complete tax return";
+"tax_return_text" = "Finish in just 30 minutes";
+"start_button_title" = "Start";
+"calculating_text" = "Calculating...";
+"try_again_button_title" = "Try again";
+
+// Common
+
+"button_get_estimate" = "Get Estimate";
+"optional" = "optional";
+"enter_amount" = "Enter Amount";
+"dash" = " - ";
+"yes_button_title" = "Yes";
+"no_button_title" = "No";
+"minimize_ButtonTitle" = "minimize";
+"learn_more_ButtonTitle" = "learn more";
+"key_board_Toolbar_Button_Title" = "Done";
+"get_estimate_button_title" = "Tax Estimator";
+"error_message" = "Something went wrong...";
+"distance_to_work" = "Enter Kilometers";
+"work_from_home_days" = "Enter Days";
