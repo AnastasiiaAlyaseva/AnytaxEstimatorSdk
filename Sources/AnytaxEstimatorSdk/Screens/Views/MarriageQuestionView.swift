@@ -1,10 +1,11 @@
 import SwiftUI
 
 struct MarriageQuestionView: View {
-    typealias Loc = AppConstatns.MarriageQuestionView
+    typealias Loc = AppConstants.MarriageQuestionView
     
-    @Environment(\.colorScheme) var colorScheme
-    @Binding var showExplanation: Bool
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.theme) private var theme
+    @Binding private(set) var showExplanation: Bool
     let explanation: String?
     let infoButtonColor: Color
     
@@ -12,7 +13,10 @@ struct MarriageQuestionView: View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 0) {
                 Text(Loc.title)
-                    .questionTextStyle()
+                    .questionTextStyle(
+                        colorScheme: colorScheme,
+                        theme: theme
+                    )
                     .frame(minHeight: 87)
                     .cornerRadius(10)
                 
@@ -25,8 +29,8 @@ struct MarriageQuestionView: View {
                         HStack(spacing: 5) {
                             Image(systemName: showExplanation ? "x.circle" : "info.circle")
                             Text(showExplanation
-                                 ? AppConstatns.Common.minimizeButtonTitle
-                                 : AppConstatns.Common.learnMoreButtonTitle
+                                 ? AppConstants.Common.minimizeButtonTitle
+                                 : AppConstants.Common.learnMoreButtonTitle
                             )
                         }
                         .font(.system(size: 15, weight: .regular, design: .rounded))
@@ -38,14 +42,17 @@ struct MarriageQuestionView: View {
                     
                     if showExplanation {
                         Text(explanation)
-                            .grayInfoTextStyle(colorScheme: colorScheme)
+                            .grayInfoTextStyle(
+                                colorScheme: colorScheme,
+                                theme: theme
+                            )
                             .padding(.top)
                     }
                 }
             }
         }
         .padding()
-        .background(Color.backgroundColor(colorScheme: colorScheme))
+        .background(theme.elementBackground.resolve(for: colorScheme))
         .cornerRadius(10)
         .padding(.horizontal)
     }

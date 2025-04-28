@@ -3,28 +3,39 @@ import UIKit
 
 public struct AnytaxEstimatorContentView: View {
     @StateObject private var viewModel: TaxEstimationViewModel
+    @Environment(\.theme) private var theme
     
-    public init(onFinishFlow: @escaping () -> Void) {
+    public init(config: AnytaxEstimatorConfig) {
         _viewModel = StateObject(
-            wrappedValue: TaxEstimationViewModel(onFinishFlow: onFinishFlow)
+            wrappedValue: TaxEstimationViewModel(config: config)
         )
     }
     
     public var body: some View {
-        WelcomeScreen(viewModel: viewModel)
+        Group {
+            if viewModel.config.skipSplashScreen {
+                TaxEstimatorScreen(viewModel: viewModel)
+            } else {
+                WelcomeScreen(viewModel: viewModel)
+            }
+        }
+        .environment(\.theme, viewModel.config.theme)
     }
 }
 
 #Preview {
-    AnytaxEstimatorContentView(onFinishFlow: {})
+    AnytaxEstimatorContentView(
+        config: AnytaxEstimatorConfig(
+            onFinishFlow: { _ in }
+        )
+    )
 }
 
 public class AnytaxEstimatorContentViewController: UIViewController {
+    private let config: AnytaxEstimatorConfig
     
-    let onFinishFlow: () -> Void
-    
-    public init(onFinishFlow: @escaping () -> Void) {
-        self.onFinishFlow = onFinishFlow
+    public init(config: AnytaxEstimatorConfig) {
+        self.config = config
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -34,7 +45,7 @@ public class AnytaxEstimatorContentViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        let swiftUIView = AnytaxEstimatorContentView(onFinishFlow: onFinishFlow)
+        let swiftUIView = AnytaxEstimatorContentView(config: config)
         let hostingController = UIHostingController(rootView: swiftUIView)
         addChild(hostingController)
         hostingController.view.frame = view.bounds

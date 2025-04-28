@@ -24,7 +24,7 @@ final class NetworkClient: NetworkClientProtocol {
     convenience init() {
         self.init(
             session: .shared,
-            baseUrl: URL(string: AppConstatns.Api.baseUrlString)
+            baseUrl: URL(string: AppConstants.Api.baseUrlString)
         )
     }
     

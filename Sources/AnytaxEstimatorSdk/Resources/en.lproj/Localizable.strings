@@ -85,7 +85,8 @@
 "no_button_title" = "No";
 "minimize_ButtonTitle" = "minimize";
 "learn_more_ButtonTitle" = "learn more";
-"key_board_Toolbar_Button_Title" = "Done";
+"key_board_Toolbar_Done_Button_Title" = "Done";
+"key_board_Toolbar_Next_Button_Title" = "Next";
 "get_estimate_button_title" = "Tax Estimator";
 "error_message" = "Something went wrong...";
 "distance_to_work" = "Enter Kilometers";

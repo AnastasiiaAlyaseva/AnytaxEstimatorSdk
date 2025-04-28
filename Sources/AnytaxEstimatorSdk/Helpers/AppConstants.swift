@@ -1,15 +1,16 @@
 import SwiftUI
 
-struct AppConstatns {
+struct AppConstants {
     static let anytax = AttributedString("any") + "tax".bolded
     static let navigationBarTitle = String(localized: "get_estimate_button_title")
     
     struct Common {
         static let optionalAmountPlaceholder = String(localized: "optional").italicized
-            + String(localized: "dash").asAttributedString
-            + String(localized: "enter_amount").asAttributedString
+        + String(localized: "dash").asAttributedString
+        + String(localized: "enter_amount").asAttributedString
         
-        static let keyboardToolbarButtonTitle = String(localized: "key_board_Toolbar_Button_Title")
+        static let keyboardToolbarDoneButtonTitle = String(localized: "key_board_Toolbar_Done_Button_Title")
+        static let keyboardToolbarNextButtonTitle = String(localized: "key_board_Toolbar_Next_Button_Title")
         static let yesButtonTitle = String(localized: "yes_button_title")
         static let noButtonTitle =  String(localized: "no_button_title")
         static let getEstimateButtonTitle = String(localized:"button_get_estimate")
@@ -38,13 +39,13 @@ struct AppConstatns {
     }
     
     struct WelcomeScreen {
-        static let estimatorTitle = String(localized:"estimator_Title")
-        static let getEstimateButtonTitle = String(localized:"get_Estimate_ButtonTitle")
+        static let estimatorTitle = String(localized: "estimator_Title")
+        static let getEstimateButtonTitle = String(localized: "get_Estimate_ButtonTitle")
     }
     
     struct TaxEstimatorScreen {
-        static let titleHeaderView = String(localized:"caption")
-        static let subtitleHeaderView = String(localized:"caption_hint")
+        static let titleHeaderView = String(localized: "caption")
+        static let subtitleHeaderView = String(localized: "caption_hint")
         
         static let yearlyGrossIncomeQuestion = String(localized: "question_1").asAttributedString
         static let yearlyGrossIncomeExplanation = String(localized:"question_1_hint")
@@ -65,7 +66,7 @@ struct AppConstatns {
         static let subtitleHeaderView = String(localized: "partner_optional_caption_hint")
         
         static let spouseHouseholdServicesQuestion = String(localized: "partner_question_4").asAttributedString
-            + String(localized: "labor_costs_only").italicized
+        + String(localized: "labor_costs_only").italicized
         static let spouseHouseholdServicesExplanation = String(localized: "partner_question_4_hint")
         
         static let spouseWorkExpensesQuestion = String(localized: "partner_question_5").asAttributedString
@@ -96,7 +97,7 @@ struct AppConstatns {
         static let subtitleHeaderView = String(localized: "optional_caption_hint")
         
         static let householdServicesQuestion = String(localized: "question_6").asAttributedString
-            + String(localized: "labor_costs_only").italicized
+        + String(localized: "labor_costs_only").italicized
         static let householdServicesExplanation = String(localized: "question_6_hint")
         
         static let workExpensesQuestion = String(localized: "question_7").asAttributedString
@@ -118,5 +119,4 @@ struct AppConstatns {
         static let startButtonTitle = String(localized: "start_button_title")
         static let tryAgainButtonTitle = String(localized: "try_again_button_title")
     }
-    
 }

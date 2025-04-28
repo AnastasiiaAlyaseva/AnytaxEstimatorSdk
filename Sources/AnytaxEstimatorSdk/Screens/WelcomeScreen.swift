@@ -1,23 +1,24 @@
 import SwiftUI
 
 struct WelcomeScreen: View {
-    typealias Loc = AppConstatns.WelcomeScreen
+    typealias Loc = AppConstants.WelcomeScreen
     
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.theme) private var theme
     @ObservedObject private(set) var viewModel: TaxEstimationViewModel
     
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
                 ZStack {
-                    Color(Color.systemBlue(colorScheme: colorScheme))
+                    theme.brandPrimaryColor.resolve(for: colorScheme)
                         .ignoresSafeArea()
                     
                     VStack {
                         Image(.logo)
                             .responsiveImage(geometry: geometry)
                         
-                        Text(AppConstatns.anytax)
+                        Text(AppConstants.anytax)
                             .font(.system(size: 60, weight: .regular, design: .rounded))
                             .foregroundColor(.white)
                             .padding(.top, 10)
@@ -28,11 +29,14 @@ struct WelcomeScreen: View {
                             .foregroundColor(.white)
                             .padding(.bottom, geometry.size.height * 0.1)
                         
-                        NavigationLink(destination: TaxEstimatorScreen(viewModel: viewModel)) {
+                        NavigationLink(
+                            destination: TaxEstimatorScreen(viewModel: viewModel)
+                                .environment(\.theme, theme)
+                        ) {
                             Text(Loc.getEstimateButtonTitle)
                                 .font(.system(size: 15, weight: .semibold, design: .rounded))
                                 .lineSpacing(7.5)
-                                .foregroundColor(Color.systemBlue(colorScheme: colorScheme))
+                                .foregroundColor(theme.brandPrimaryColor.resolve(for: colorScheme))
                                 .frame(maxWidth: .infinity)
                                 .padding()
                                 .background(.white)
@@ -43,11 +47,24 @@ struct WelcomeScreen: View {
                     }
                 }
             }
+            .onAppear {
+                viewModel.config.onScreenAppeared?(.welcome)
+            }
+            .withCloseButtonIfNeeded(
+                isAppEmbedded: viewModel.config.isAppEmbedded,
+                colorScheme: colorScheme,
+                theme: theme,
+                screen: .welcome,
+                action: {
+                    viewModel.config.onFinishFlow(.welcome)
+                }
+            )
         }.navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview {
-    let viewModel = TaxEstimationViewModel(onFinishFlow: {})
+    let config = AnytaxEstimatorConfig(onFinishFlow: { _ in })
+    let viewModel = TaxEstimationViewModel(config: config)
     return WelcomeScreen(viewModel: viewModel)
 }

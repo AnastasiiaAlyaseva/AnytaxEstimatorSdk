@@ -1,12 +1,16 @@
 import SwiftUI
 
 struct PartnersDetailsScreen: View {
-    typealias Loc = AppConstatns.PartnersDetailsScreen
+    typealias Loc = AppConstants.PartnersDetailsScreen
     
-    @Environment(\.dismiss) var dismiss
-    @FocusState private var isInputActive: Bool
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.theme) private var theme
+    @FocusState private var focusedField: FocusField?
     
     @ObservedObject private(set) var viewModel: TaxEstimationViewModel
+    
+    private let fieldsOrder: [FocusField] = [.spouseIncome, .spouseDistanceToWork, .spouseWorkFromHomeDays]
     
     var body: some View {
         NavigationStack {
@@ -20,36 +24,48 @@ struct PartnersDetailsScreen: View {
                     VStack(spacing: 25){
                         QuestionRowView(
                             question: Loc.spouseIncomeQuestion,
-                            placeholder: AppConstatns.Common.yearlyGrossIncomePlaceholder,
+                            placeholder: AppConstants.Common.yearlyGrossIncomePlaceholder,
                             explanation: Loc.spouseIncomeExplanation,
-                            text: $viewModel.taxEstimationInputData.spouseIncome
+                            text: $viewModel.taxEstimationInputData.spouseIncome,
+                            currentField: .spouseIncome,
+                            focusedField: $focusedField
                         )
                         
                         QuestionRowView(
                             question: Loc.spouseDistanceToWorkQuestion,
-                            placeholder: AppConstatns.Common.distanceToWorkPlaceholder,
+                            placeholder: AppConstants.Common.distanceToWorkPlaceholder,
                             explanation: nil,
-                            text: $viewModel.taxEstimationInputData.spouseDistanceToWork
+                            text: $viewModel.taxEstimationInputData.spouseDistanceToWork,
+                            currentField: .spouseDistanceToWork,
+                            focusedField: $focusedField
                         )
                         
                         QuestionRowView(
                             question: Loc.spouseWorkFromHomeDaysQuestion,
-                            placeholder: AppConstatns.Common.workFromHomeDaysPlaceholder,
+                            placeholder: AppConstants.Common.workFromHomeDaysPlaceholder,
                             explanation: Loc.spouseWorkFromHomeDaysExplanation,
-                            text: $viewModel.taxEstimationInputData.spouseWorkFromHomeDays
+                            text: $viewModel.taxEstimationInputData.spouseWorkFromHomeDays,
+                            currentField: .spouseWorkFromHomeDays,
+                            focusedField: $focusedField
                         )
                     }
                     
                     AlmostDoneView()
                     
                     HStack(spacing: 20) {
-                        NavigationLink(destination: PartnersOptionalQuestionsScreen(viewModel: viewModel)) {
+                        NavigationLink(
+                            destination: PartnersOptionalQuestionsScreen(viewModel: viewModel)
+                                .environment(\.theme, theme)
+                        ) {
                             ActionButton(
                                 icon: "checkmark.circle",
-                                title: AppConstatns.Common.yesButtonTitle
+                                title: AppConstants.Common.yesButtonTitle
                             )
                         }
-                        NavigationLink(destination: TaxResultScreen(viewModel: viewModel)) {
+                        NavigationLink(
+                            destination: TaxResultScreen(viewModel: viewModel)
+                                .environment(\.theme, theme)
+                        ) {
                             ActionButton(
                                 icon: "x.circle",
                                 title: Loc.getResultButtonTitle
@@ -61,14 +77,36 @@ struct PartnersDetailsScreen: View {
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            .taxEstimatorToolbar(dismiss: dismiss)
-            .keyboardToolbar(isInputActive: $isInputActive)
+            .taxEstimatorToolbar(
+                dismiss: dismiss,
+                colorScheme: colorScheme,
+                theme: theme
+            )
+            .keyboardButtonToolbar(
+                fields: fieldsOrder,
+                currentField: focusedField,
+                focusedField: $focusedField
+            )
+            .onAppear {
+                viewModel.config.onScreenAppeared?(.partnersDetails)
+            }
+            .withCloseButtonIfNeeded(
+                isAppEmbedded: viewModel.config.isAppEmbedded,
+                colorScheme: colorScheme,
+                theme: theme,
+                screen: .partnersDetails,
+                action: {
+                    viewModel.config.onFinishFlow(.partnersDetails)
+                }
+            )
         }
         .navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview {
-    let viewModel = TaxEstimationViewModel(onFinishFlow: {})
+    let config = AnytaxEstimatorConfig(onFinishFlow: { _ in })
+    let viewModel = TaxEstimationViewModel(config: config)
     return PartnersDetailsScreen(viewModel: viewModel)
 }
+

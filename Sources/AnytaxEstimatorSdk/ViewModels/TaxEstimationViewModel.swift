@@ -2,11 +2,12 @@ import Foundation
 import Combine
 
 final class TaxEstimationViewModel: ObservableObject {
-    @Published var isLoading: Bool
-    @Published var errorMessage: String?
-    @Published var taxEstimationResults: TaxEstimationResultsData?
+    let config: AnytaxEstimatorConfig
+    
+    @Published private(set) var isLoading: Bool
+    @Published private(set) var errorMessage: String?
+    @Published private(set) var taxEstimationResults: TaxEstimationResultsData?
     @Published var taxEstimationInputData: TaxEstimationInputData
-    let onFinishFlow: () -> Void
     
     private let taxEstimationService: TaxEstimationServiceProtocol
     private let updateQueue = DispatchQueue(label: "com.AnytaxEstimator.TaxEstimationViewModel.updateQueue")
@@ -14,35 +15,37 @@ final class TaxEstimationViewModel: ObservableObject {
     // MARK: - Init
     
     init(
+        config: AnytaxEstimatorConfig,
         isLoading: Bool,
         errorMessage: String?,
         taxEstimationResults: TaxEstimationResultsData?,
         taxEstimationInputData: TaxEstimationInputData,
-        taxEstimationService: TaxEstimationServiceProtocol,
-        onFinishFlow: @escaping () -> Void
+        taxEstimationService: TaxEstimationServiceProtocol
     ) {
+        self.config = config
         self.isLoading = isLoading
         self.errorMessage = errorMessage
         self.taxEstimationResults = taxEstimationResults
         self.taxEstimationInputData = taxEstimationInputData
         self.taxEstimationService = taxEstimationService
-        self.onFinishFlow = onFinishFlow
     }
     
-    convenience init(onFinishFlow: @escaping () -> Void) {
+    convenience init(config: AnytaxEstimatorConfig) {
         self.init(
+            config: config,
             isLoading: false,
             errorMessage: nil,
             taxEstimationResults: nil,
             taxEstimationInputData: TaxEstimationInputData(),
-            taxEstimationService: TaxEstimationService(),
-            onFinishFlow: onFinishFlow
+            taxEstimationService: TaxEstimationService()
         )
     }
     
     // MARK: - Actions
     
     func getTaxEstimations() {
+        guard !isLoading else { return }
+        
         isLoading = true
         errorMessage = nil
         
@@ -56,7 +59,7 @@ final class TaxEstimationViewModel: ObservableObject {
                             estimatedTaxValue: response.estimatedTax
                         )
                     } else if error != nil {
-                        self?.errorMessage = AppConstatns.Api.errorMessage
+                        self?.errorMessage = AppConstants.Api.errorMessage
                     }
                 }
             }

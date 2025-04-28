@@ -1,17 +1,19 @@
 import SwiftUI
 
 struct OptionalQuestionsScreen: View {
-    typealias Loc = AppConstatns.OptionalQuestionsScreen
+    typealias Loc = AppConstants.OptionalQuestionsScreen
     
-    @Environment(\.colorScheme) var colorScheme
-    @Environment(\.dismiss) var dismiss
-    @FocusState private var isInputActive: Bool
-    
-    @ObservedObject private(set) var viewModel: TaxEstimationViewModel
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.theme) private var theme
+    @FocusState private var focusedField: FocusField?
     @State private var showExplanation = false
     
+    @ObservedObject private(set) var viewModel: TaxEstimationViewModel
+    
+    private let fieldsOrder: [FocusField] = [.householdServices, .workExpenses, .specialExpenses, .taxWithheld]
     private var infoButtonColor: Color {
-        colorScheme == .light ? Color.systemBlue(colorScheme: colorScheme) : .white
+        colorScheme == .light ? theme.brandPrimaryColor.lightColor : .white
     }
     
     var body: some View {
@@ -26,30 +28,38 @@ struct OptionalQuestionsScreen: View {
                     VStack(spacing: 25){
                         QuestionRowView(
                             question: Loc.householdServicesQuestion,
-                            placeholder: AppConstatns.Common.optionalAmountPlaceholder,
+                            placeholder: AppConstants.Common.optionalAmountPlaceholder,
                             explanation: Loc.householdServicesExplanation,
-                            text: $viewModel.taxEstimationInputData.householdServices
+                            text: $viewModel.taxEstimationInputData.householdServices,
+                            currentField: .householdServices,
+                            focusedField: $focusedField
                         )
                         
                         QuestionRowView(
                             question: Loc.workExpensesQuestion,
-                            placeholder: AppConstatns.Common.optionalAmountPlaceholder,
+                            placeholder: AppConstants.Common.optionalAmountPlaceholder,
                             explanation: nil,
-                            text: $viewModel.taxEstimationInputData.workExpenses
+                            text: $viewModel.taxEstimationInputData.workExpenses,
+                            currentField: .workExpenses,
+                            focusedField: $focusedField
                         )
                         
                         QuestionRowView(
                             question: Loc.specialExpensesQuestion,
-                            placeholder: AppConstatns.Common.optionalAmountPlaceholder,
+                            placeholder: AppConstants.Common.optionalAmountPlaceholder,
                             explanation: nil,
-                            text: $viewModel.taxEstimationInputData.specialExpenses
+                            text: $viewModel.taxEstimationInputData.specialExpenses,
+                            currentField: .specialExpenses,
+                            focusedField: $focusedField
                         )
                         
                         QuestionRowView(
                             question: Loc.taxWithheldQuestion,
-                            placeholder: AppConstatns.Common.optionalAmountPlaceholder,
+                            placeholder: AppConstants.Common.optionalAmountPlaceholder,
                             explanation: Loc.taxWithheldExplanation,
-                            text: $viewModel.taxEstimationInputData.taxWithheld
+                            text: $viewModel.taxEstimationInputData.taxWithheld,
+                            currentField: .taxWithheld,
+                            focusedField: $focusedField
                         )
                     }
                     
@@ -61,20 +71,26 @@ struct OptionalQuestionsScreen: View {
                     .padding(.vertical, 20)
                     
                     HStack(spacing: 20) {
-                        NavigationLink(destination: PartnersDetailsScreen(viewModel: viewModel)) {
+                        NavigationLink(
+                            destination: PartnersDetailsScreen(viewModel: viewModel)
+                                .environment(\.theme, theme)
+                        ) {
                             ActionButton(
                                 icon: "checkmark.circle",
-                                title: AppConstatns.Common.yesButtonTitle
+                                title: AppConstants.Common.yesButtonTitle
                             )
                         }
                         .simultaneousGesture(TapGesture().onEnded {
                             viewModel.taxEstimationInputData.married = true
                         })
                         
-                        NavigationLink(destination: TaxResultScreen(viewModel: viewModel)) {
+                        NavigationLink(
+                            destination: TaxResultScreen(viewModel: viewModel)
+                                .environment(\.theme, theme)
+                        ) {
                             ActionButton(
                                 icon: "x.circle",
-                                title: AppConstatns.Common.noButtonTitle
+                                title: AppConstants.Common.noButtonTitle
                             )
                         }
                         .simultaneousGesture(TapGesture().onEnded {
@@ -84,22 +100,49 @@ struct OptionalQuestionsScreen: View {
                     .padding(.horizontal, 20)
                     .padding(.bottom, 40)
                     
-                    NavigationLink(destination: TaxResultScreen(viewModel: viewModel)) {
-                        Text(AppConstatns.Common.getEstimateButtonTitle)
-                            .primaryButtonStyle(colorScheme: colorScheme)
+                    NavigationLink(
+                        destination: TaxResultScreen(viewModel: viewModel)
+                            .environment(\.theme, theme)
+                    ) {
+                        Text(AppConstants.Common.getEstimateButtonTitle)
+                            .primaryButtonStyle(
+                                colorScheme: colorScheme,
+                                theme: theme
+                            )
                     }
                     .padding(.bottom, 20)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            .taxEstimatorToolbar(dismiss: dismiss)
-            .keyboardToolbar(isInputActive: $isInputActive)
+            .taxEstimatorToolbar(
+                dismiss: dismiss,
+                colorScheme: colorScheme,
+                theme: theme
+            )
+            .keyboardButtonToolbar(
+                fields: fieldsOrder,
+                currentField: focusedField,
+                focusedField: $focusedField
+            )
+            .onAppear {
+                viewModel.config.onScreenAppeared?(.optionalQuestions)
+            }
+            .withCloseButtonIfNeeded(
+                isAppEmbedded: viewModel.config.isAppEmbedded,
+                colorScheme: colorScheme,
+                theme: theme,
+                screen: .optionalQuestions,
+                action: {
+                    viewModel.config.onFinishFlow(.optionalQuestions)
+                }
+            )
         }
         .navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview {
-    let viewModel = TaxEstimationViewModel(onFinishFlow: {})
+    let config = AnytaxEstimatorConfig(onFinishFlow: { _ in })
+    let viewModel = TaxEstimationViewModel(config: config)
     return OptionalQuestionsScreen(viewModel: viewModel)
 }

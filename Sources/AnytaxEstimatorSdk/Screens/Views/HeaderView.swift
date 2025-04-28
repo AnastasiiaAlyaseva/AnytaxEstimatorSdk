@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct HeaderView: View {
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.theme) private var theme
+    
     let title: String
     let subtitle: String
     
@@ -8,12 +11,12 @@ struct HeaderView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text(title)
                 .font(.system(size: 24, weight: .semibold, design: .rounded))
-                .foregroundColor(.label)
+                .foregroundColor(theme.primaryText.resolve(for: colorScheme))
                 .lineSpacing(12)
             
             Text(subtitle)
                 .font(.system(size: 15, weight: .regular, design: .rounded))
-                .foregroundColor(.secondaryLabel)
+                .foregroundColor(theme.secondaryText.resolve(for: colorScheme))
                 .lineSpacing(7.5)
         }
         .frame(maxWidth: .infinity, alignment: .leading)

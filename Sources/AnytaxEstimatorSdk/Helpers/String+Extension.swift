@@ -1,6 +1,10 @@
 import SwiftUI
 
 extension String {
+    init(localized: String.LocalizationValue) {
+        self = String(localized: localized, bundle: .currentBundle)
+    }
+    
     var asAttributedString: AttributedString {
         AttributedString(self)
     }

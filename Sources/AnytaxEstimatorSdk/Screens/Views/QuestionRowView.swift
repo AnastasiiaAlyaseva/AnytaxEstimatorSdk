@@ -1,24 +1,30 @@
 import SwiftUI
 
 struct QuestionRowView: View {
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.theme) private var theme
     let question: AttributedString
     let placeholder: AttributedString
     let explanation: String?
     
-    @FocusState private var isFocused: Bool
-    @Binding var text: String
+    
+    @Binding private(set) var text: String
     @State private var showExplanation = false
+    let currentField: FocusField
+    @FocusState.Binding private(set) var focusedField: FocusField?
     
     private var infoButtonColor: Color {
-        colorScheme == .light ? Color.systemBlue(colorScheme: colorScheme) : .white
+        colorScheme == .light ? theme.brandPrimaryColor.lightColor : .white
     }
     
     var body: some View {
         VStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 0) {
                 Text(question)
-                    .questionTextStyle()
+                    .questionTextStyle(
+                        colorScheme: colorScheme,
+                        theme: theme
+                    )
                 
                 if let explanation = explanation {
                     Button(action: {
@@ -29,8 +35,8 @@ struct QuestionRowView: View {
                         HStack(spacing: 5) {
                             Image(systemName: showExplanation ? "x.circle" : "info.circle")
                             Text(showExplanation
-                                 ? AppConstatns.Common.minimizeButtonTitle
-                                 : AppConstatns.Common.learnMoreButtonTitle
+                                 ? AppConstants.Common.minimizeButtonTitle
+                                 : AppConstants.Common.learnMoreButtonTitle
                             )
                         }
                         .font(.system(size: 15, weight: .regular, design: .rounded))
@@ -42,18 +48,24 @@ struct QuestionRowView: View {
                     
                     if showExplanation {
                         Text(explanation)
-                            .grayInfoTextStyle(colorScheme: colorScheme)
+                            .grayInfoTextStyle(
+                                colorScheme: colorScheme,
+                                theme: theme
+                            )
                             .padding(.top)
                     }
                 }
             }
-            .questionRowBackgroundStyle(colorScheme: colorScheme)
+            .questionRowBackgroundStyle(
+                colorScheme: colorScheme,
+                theme: theme
+            )
             
             ZStack(alignment: .leading) {
-                if text.isEmpty && !isFocused {
+                if text.isEmpty && focusedField != currentField {
                     Text(placeholder)
                         .font(.system(size: 17, weight: .regular, design: .rounded))
-                        .foregroundColor(.secondaryLabel)
+                        .foregroundColor(theme.secondaryText.resolve(for: colorScheme))
                         .frame(maxWidth: .infinity, alignment: .center)
                         .frame(height: 50, alignment: .center)
                         .padding(.horizontal, 10)
@@ -69,12 +81,15 @@ struct QuestionRowView: View {
                     .multilineTextAlignment(.center)
                     .overlay(
                         RoundedRectangle(cornerRadius: 8)
-                            .stroke(.secondary.opacity(0.3), lineWidth: 1)
+                            .stroke(
+                                theme.secondaryText.resolve(for: colorScheme).opacity(0.3),
+                                lineWidth: 1
+                            )
                     )
                     .keyboardType(.numberPad)
-                    .focused($isFocused)
+                    .focused($focusedField, equals: currentField)
                     .onTapGesture {
-                        isFocused = true
+                        focusedField = currentField
                     }
             }
             .padding(.horizontal)
@@ -84,10 +99,13 @@ struct QuestionRowView: View {
 
 
 #Preview {
+    @FocusState var previewFocusedField: FocusField?
     QuestionRowView(
         question: "What is your yearly gross\nincome from employment?",
         placeholder: "Enter Amount",
         explanation: "If you choose to file jointly with your spouse this will affect your tax refund and we will ask some questions about your spouse as well.",
-        text: .constant("")
+        text: .constant(""),
+        currentField: .income,
+        focusedField: $previewFocusedField
     )
 }
