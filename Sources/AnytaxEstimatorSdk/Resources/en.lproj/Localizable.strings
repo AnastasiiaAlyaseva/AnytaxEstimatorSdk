@@ -16,7 +16,7 @@
 
 //TaxEstimatorScreen
 
-"caption" = "Want to find out much of a tax refund you can get?";
+"caption" = "Want to find out how much of a tax refund you can get?";
 "caption_hint" = "Answer a couple of questions to quickly get an estimate of your potential refund from the tax office.";
 "question_1" = "What is your yearly gross income from employment in 2024? *";
 "question_1_hint" = "You can find your gross salary for example in line 3 of your employer's income tax statement.";
@@ -31,11 +31,11 @@
 //OptionalQuestionsScreen
 
 "optional_caption" = "Optional answers for a more detailed estimate:";
-"optional_caption_hint" = "You can also give estimates if you don’t know the exact amounts otherwise just skip the answer.";
+"optional_caption_hint" = "You can also give estimates if you don’t know the exact amounts, otherwise just skip the answer.";
 "question_6" = "What expenses did you have for household-related or craftsmen's services?\n";
 "labor_costs_only" = "Labor-costs only";
-"question_6_hint" = "All household-related services and tradesmen's services can be entered here (but only pro rata labour costs travel costs and machine costs incl. VAT). Up to a maximum of €20000. We automatically calculate the deductible amount in the background.";
-"question_7" = "How much did you pay for items that you use for work, like a Desk, Laptop or Headphones?";
+"question_6_hint" = "All household-related services and tradesmen's services can be entered here (but only pro rata labour costs, travel costs, and machine costs incl. VAT). Up to a maximum of €20000. We automatically calculate the deductible amount in the background.";
+"question_7" = "How much did you pay for items that you use for work, like a desk, laptop or headphones?";
 "question_7_hint" = "";
 "question_8" = "How much did you pay for special expenses like Childcare, School Fees, or own Education costs?";
 "question_8_hint" = "";

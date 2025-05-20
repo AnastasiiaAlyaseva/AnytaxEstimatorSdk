@@ -37,7 +37,7 @@ final class TaxEstimationViewModel: ObservableObject {
             errorMessage: nil,
             taxEstimationResults: nil,
             taxEstimationInputData: TaxEstimationInputData(),
-            taxEstimationService: TaxEstimationService()
+            taxEstimationService: TaxEstimationService(apiKey: config.apiKey)
         )
     }
     
@@ -48,6 +48,7 @@ final class TaxEstimationViewModel: ObservableObject {
         
         isLoading = true
         errorMessage = nil
+        taxEstimationResults = nil
         
         let request = TaxEstimationRequest(inputData: taxEstimationInputData)
         taxEstimationService.fetchTaxEstimate(request: request) { [weak self] response, error in

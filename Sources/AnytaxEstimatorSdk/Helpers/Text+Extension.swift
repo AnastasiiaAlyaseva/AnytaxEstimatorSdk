@@ -25,7 +25,7 @@ extension Text {
     func grayInfoTextStyle(colorScheme: ColorScheme, theme: Theme) -> some View {
         self
             .font(.system(size: 15, weight: .regular, design: .rounded))
-            .foregroundColor(theme.secondaryText.resolve(for: colorScheme))
+            .foregroundColor(theme.infoBoxTextColor.resolve(for: colorScheme))
             .lineSpacing(7.5)
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)

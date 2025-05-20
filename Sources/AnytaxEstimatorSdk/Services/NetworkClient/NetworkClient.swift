@@ -54,7 +54,10 @@ final class NetworkClient: NetworkClientProtocol {
         urlRequest.allHTTPHeaderFields = request.allHTTPHeaderFields
         
         #if DEBUG
-        print("Request: \(urlRequest)")
+        print("Request: \(request.httpMethod) \(urlRequest)")
+        if let headers = urlRequest.allHTTPHeaderFields {
+            print("Request headers: \(headers)")
+        }
         #endif
         
         performRequest(urlRequest, completion: completion)

@@ -132,7 +132,10 @@ struct TaxEstimatorScreen: View {
 }
 
 #Preview {
-    let config = AnytaxEstimatorConfig(onFinishFlow: { _ in })
+    let config = AnytaxEstimatorConfig(
+        apiKey: "anytax-api-key-2023",
+        onFinishFlow: { _ in }
+    )
     let viewModel = TaxEstimationViewModel(config: config)
-    return TaxEstimatorScreen(viewModel: viewModel)
+    TaxEstimatorScreen(viewModel: viewModel)
 }

@@ -10,15 +10,20 @@ protocol TaxEstimationServiceProtocol: AnyObject {
 final class TaxEstimationService: TaxEstimationServiceProtocol {
     private let networkClient: NetworkClientProtocol
     private let endpoint = "/estimator"
+    private let apiKey: String
     
     // MARK: - Init
     
-    init(networkClient: NetworkClientProtocol) {
+    init(networkClient: NetworkClientProtocol, apiKey: String) {
         self.networkClient = networkClient
+        self.apiKey = apiKey
     }
     
-    convenience init() {
-        self.init(networkClient: NetworkClient())
+    convenience init(apiKey: String) {
+        self.init(
+            networkClient: NetworkClient(),
+            apiKey: apiKey
+        )
     }
     
     // MARK: - TaxEstimationServiceProtocol
@@ -33,7 +38,10 @@ final class TaxEstimationService: TaxEstimationServiceProtocol {
             httpMethod: "GET",
             queryItems: queryItems,
             timeoutInterval: 20,
-            allHTTPHeaderFields: ["accept": "application/json"]
+            allHTTPHeaderFields: [
+                "accept": "application/json",
+                "x-api-key": apiKey
+            ]
         )
         
         networkClient.request(networkRequest) { (result: Result<TaxEstimationResponse, Error>) in

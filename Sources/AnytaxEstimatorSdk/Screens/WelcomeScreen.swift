@@ -2,32 +2,32 @@ import SwiftUI
 
 struct WelcomeScreen: View {
     typealias Loc = AppConstants.WelcomeScreen
-    
+
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.theme) private var theme
     @ObservedObject private(set) var viewModel: TaxEstimationViewModel
-    
+
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
                 ZStack {
                     theme.brandPrimaryColor.resolve(for: colorScheme)
                         .ignoresSafeArea()
-                    
+
                     VStack {
                         Image(.logo)
                             .responsiveImage(geometry: geometry)
-                        
+
                         Text(AppConstants.anytax)
                             .font(.system(size: 60, weight: .regular, design: .rounded))
                             .foregroundColor(.white)
                             .padding(.top, 10)
-                        
+
                         Text(Loc.estimatorTitle)
                             .font(.system(size: 30, weight: .regular, design: .default))
                             .italic()
                             .foregroundColor(.white)
-                            .padding(.bottom, geometry.size.height * 0.1)
+                            .padding(.bottom, geometry.size.height * (geometry.size.height > geometry.size.width ? 0.1 : 0.02))
                         
                         NavigationLink(
                             destination: TaxEstimatorScreen(viewModel: viewModel)
@@ -43,8 +43,9 @@ struct WelcomeScreen: View {
                                 .cornerRadius(10)
                                 .shadow(radius: 2)
                         }
-                        .padding(.horizontal, geometry.size.width * 0.1)
+                        .padding(.horizontal, geometry.size.width * (geometry.size.height > geometry.size.width ? 0.1 : 0.2))
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 }
             }
             .onAppear {
@@ -64,7 +65,10 @@ struct WelcomeScreen: View {
 }
 
 #Preview {
-    let config = AnytaxEstimatorConfig(onFinishFlow: { _ in })
+    let config = AnytaxEstimatorConfig(
+        apiKey: "anytax-api-key-2023",
+        onFinishFlow: { _ in }
+    )
     let viewModel = TaxEstimationViewModel(config: config)
-    return WelcomeScreen(viewModel: viewModel)
+    WelcomeScreen(viewModel: viewModel)
 }

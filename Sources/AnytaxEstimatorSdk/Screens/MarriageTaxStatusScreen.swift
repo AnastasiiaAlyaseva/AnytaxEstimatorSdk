@@ -92,7 +92,10 @@ struct MarriageTaxStatusScreen: View {
 }
 
 #Preview {
-    let config = AnytaxEstimatorConfig(onFinishFlow: { _ in })
+    let config = AnytaxEstimatorConfig(
+        apiKey: "anytax-api-key-2023",
+        onFinishFlow: { _ in }
+    )
     let viewModel = TaxEstimationViewModel(config: config)
-    return MarriageTaxStatusScreen(viewModel: viewModel)
+    MarriageTaxStatusScreen(viewModel: viewModel)
 }

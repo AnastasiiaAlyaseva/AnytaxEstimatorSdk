@@ -7,6 +7,7 @@ public struct Theme: Sendable {
     let questionRowBackground: DynamicColor
     let semiTransparentBackground: DynamicColor
     let infoBoxBackground: DynamicColor
+    let infoBoxTextColor: DynamicColor
     let primaryText: DynamicColor
     let secondaryText: DynamicColor
     let elementBackground: DynamicColor
@@ -18,6 +19,7 @@ public struct Theme: Sendable {
         questionRowBackground: DynamicColor? = nil,
         semiTransparentBackground: DynamicColor? = nil,
         infoBoxBackground: DynamicColor? = nil,
+        infoBoxTextColor: DynamicColor? = nil,
         primaryText: DynamicColor? = nil,
         secondaryText: DynamicColor? = nil,
         elementBackground: DynamicColor? = nil
@@ -38,6 +40,7 @@ public struct Theme: Sendable {
             light: Color.infoBoxBackground(colorScheme: .light),
             dark: Color.infoBoxBackground(colorScheme: .dark)
         )
+        self.infoBoxTextColor = infoBoxTextColor ?? .systemColor(Color.infoBoxTextColor)
         self.primaryText = primaryText ?? .systemColor(Color.primaryText)
         self.secondaryText = secondaryText ?? .systemColor(Color.secondaryText)
         self.elementBackground = elementBackground ?? .systemColor(Color.elementBackground)

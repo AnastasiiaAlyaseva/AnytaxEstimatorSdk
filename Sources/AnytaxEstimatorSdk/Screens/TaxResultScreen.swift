@@ -32,6 +32,7 @@ struct TaxResultScreen: View {
                         } else if let response = viewModel.taxEstimationResults {
                             if let customResultView = viewModel.config.resultView {
                                 customResultView(response.displayValue)
+                                    .frame(minHeight: geometry.size.height)
                             } else {
                                 TaxResultContentView(
                                     displayValue: response.displayValue,
@@ -41,6 +42,7 @@ struct TaxResultScreen: View {
                                         viewModel.config.onFinishFlow(.taxResult)
                                     }
                                 )
+                                .frame(minHeight: geometry.size.height)
                             }
                         }
                         else if let error = viewModel.errorMessage {
@@ -184,7 +186,10 @@ private struct TaxResultContentView: View {
 
 
 #Preview {
-    let config = AnytaxEstimatorConfig(onFinishFlow: { _ in })
+    let config = AnytaxEstimatorConfig(
+        apiKey: "anytax-api-key-2023",
+        onFinishFlow: { _ in }
+    )
     let viewModel = TaxEstimationViewModel(config: config)
-    return TaxResultScreen(viewModel: viewModel)
+    TaxResultScreen(viewModel: viewModel)
 }

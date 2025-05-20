@@ -26,6 +26,7 @@ public struct AnytaxEstimatorContentView: View {
 #Preview {
     AnytaxEstimatorContentView(
         config: AnytaxEstimatorConfig(
+            apiKey: "anytax-api-key-2023",
             onFinishFlow: { _ in }
         )
     )

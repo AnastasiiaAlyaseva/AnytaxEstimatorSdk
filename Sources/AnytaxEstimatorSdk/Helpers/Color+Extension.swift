@@ -37,6 +37,10 @@ extension Color {
         Color(UIColor.secondaryLabel)
     }
     
+    static var infoBoxTextColor: Color {
+        Color(UIColor.secondaryLabel)
+    }
+    
     static var elementBackground: Color {
         Color(UIColor.systemBackground)
     }
